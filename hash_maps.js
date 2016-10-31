@@ -1,4 +1,4 @@
-var HashMap = function(intialCapacity) {
+var HashMap = function(initialCapacity) {
 	this.length = 0;
 	this._slots = [];
 	this._capacity = initialCapacity || 8;
@@ -12,11 +12,14 @@ HashMap.SIZE_RATIO = 3;
 HashMap.prototype.get = function(key) {
 	var index = this._findSlot(key);
 	if(this._slots[index] ===  undefined){
-		throw new Error('Key error');
+		// throw new Error('Key error');
+		return undefined;
 	}
 	return this._slots[index].value;
 };
 //The _hashString function takes a string and hashes it, outputting a number.
+
+
 HashMap._hashString = function(string) {
 	var hash = 5381;
 	for (var i=0; i<string.length; i++) {
@@ -51,7 +54,8 @@ HashMap.prototype.remove = function(key) {
 	var slot = this._slots[index];
 	//if no slow, return an error
 	if(slot === undefined) {
-		throw new Error('Key error');
+		// throw new Error('Key error');
+		return undefined;
 	}
 	//slot.deleted will turn to true
 	slot.deleted = true;
@@ -77,11 +81,12 @@ HashMap.prototype._findSlot = function(key) {
 	}
 };
 
-console.log(12 % 8);
+/*console.log(12 % 8);
 // [ , , , , , , {key: 'david', value: 'vocals', deleted: false}, ]
 var hash = new HashMap();
 hash.set('name', 'Rich');
-
+console.log(hash);
+*/
 
 // console.log(65465431%8);
 //*****************************************
@@ -102,3 +107,30 @@ HashMap.prototype._resize = function(size) {
 	}
 };
 
+
+// function checkPalindrome(str) {
+// 	var letterCount = new HashMap();
+// 	console.log(letterCount); //{ length: 0, _slots: [], _capacity: 8, _deleted: 0 }
+// 	for (var i = 0; i < str.length; i++) {
+// 		//madam
+// 		//sets the key to that specific letter
+// 		var key = str.charAt(i);
+// 		console.log(key);
+
+
+// 		if(!letterCount.get(key)) {
+// 			console.log(!letterCount.get(key));
+// 			letterCount.set(key, 1);
+// 			console.log(letterCount)
+// 		} else {
+// 			letterCount.set(key, 0);
+// 		}
+// 	}
+
+// 	return letterCount._slots;
+// }
+
+// checkPalindrome('madam');
+
+
+function checkAnagram)
