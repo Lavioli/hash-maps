@@ -60,20 +60,30 @@ HashMap.prototype.remove = function(key) {
 	//deleted count increments
 	this._deleted++;
 }
-//*********Finds the slot and measures it's capcity*******************
+//*********Finds the slot and measures it's capcity, find the right slot based on the key provided*******************
 HashMap.prototype._findSlot = function(key) {
 	var hash = HashMap._hashString(key);
+	//65465431 --> index value in limited capacity array
+	//65465431 % 8 --> 7 
 	var start = hash % this._capacity;
-	//looks through the slots 
+	//looks through the slots, keeps us within the index of 8 (which is the capacity)
 	for (var i=start; i<start + this._capacity; i++) {
 		var index = i % this._capacity;
 		var slot = this._slots[index];
-		//when undefined OR slot.key and key are equal AND slot is deleted, returns index
+		//when undefined(slot is empty) OR slot.key and key are equal (what we are looking for) AND slot.delete is false, still returns index
 		if (slot === undefined || (slot.key === key && !slot.deleted)) {
 			return index;
 		}
 	}
 };
+
+console.log(12 % 8);
+// [ , , , , , , {key: 'david', value: 'vocals', deleted: false}, ]
+var hash = new HashMap();
+hash.set('name', 'Rich');
+
+
+// console.log(65465431%8);
 //*****************************************
 HashMap.prototype._resize = function(size) {
 	var oldSlots = this._slots;
